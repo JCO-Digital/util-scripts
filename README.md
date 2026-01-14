@@ -11,7 +11,7 @@ A utility to create a symbolic link for a script in `/usr/local/bin` and make it
 **Usage:**
 
 ```bash
-sudo ./link-bin <script_name>
+./link-bin <script_name>
 ```
 
 ### `server-restart`
