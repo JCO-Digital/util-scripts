@@ -35,4 +35,4 @@ if [ "$SKIP_UPDATE" != true ] && command -v apt &> /dev/null; then
 fi
 
 # Set the server to restart at the specified time
-shutdown -r "$TIME"
+sudo shutdown -r "$TIME"
