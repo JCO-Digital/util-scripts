@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# Set the server to restart at a given time, defaulting to 01:00. Run a skippable apt update / upgrade before restarting.
+# server-restart [time] --skip-update --help
+
+# Parse command line arguments
+while [[ $# -gt 0 ]]; do
+    key="$1"
+    case $key in
+        --skip-update)
+            SKIP_UPDATE=true
+            shift
+            ;;
+        --help)
+            echo "Usage: server-restart [time] --skip-update --help"
+            echo "Set the server to restart at a given time, defaulting to 01:00. Run a skippable apt update / upgrade before restarting."
+            echo "Options:"
+            echo "  --skip-update    Skip running apt update / upgrade"
+            echo "  --help           Show this help message"
+            exit 0
+            ;;
+        *)
+            TIME="$1"
+            shift
+            ;;
+    esac
+done
+
+# Default time to 01:00 if not specified
+TIME="${TIME:-01:00}"
+
+# Run apt update / upgrade if not skipped and that apt exists.
+if [ "$SKIP_UPDATE" != true ] && command -v apt &> /dev/null; then
+	  sudo apt update && sudo apt upgrade -y
+fi
+
+# Set the server to restart at the specified time
+shutdown -r "$TIME"
