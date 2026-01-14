@@ -2,8 +2,8 @@
 
 # Check if script exists.
 if [ ! -f "$1" ]; then
-    echo "Script '$1' does not exist."
-    exit 1
+	echo "Script '$1' does not exist."
+	exit 1
 fi
 
 # Create a symbolic link to the script passed as argument in /usr/local/bin
